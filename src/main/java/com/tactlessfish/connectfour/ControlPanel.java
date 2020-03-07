@@ -1,11 +1,9 @@
-package arcadegame;// Represents a control panel for the arcade
+package com.tactlessfish.connectfour;// Represents a control panel for the arcade
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Component;
-import java.awt.Container;
 import javax.swing.Box;
 import javax.swing.*;
 
@@ -52,7 +50,7 @@ public class ControlPanel extends JPanel implements ActionListener {
         JButton button = (JButton) e.getSource();
 
         if (button == startButton) {
-            if (!game.running()) {
+            if (!game.isRunning()) {
                 ((JPanel) (game)).requestFocus(); //need to provide the JPanel focus
                 game.startGame();
                 gStats.update(0);

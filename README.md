@@ -1,2 +1,2 @@
-# arcade-game
-An arcade game using interfaces and Java Swing.
+# Connect Four
+An connect four game made with interfaces and Java Swing.

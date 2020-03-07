@@ -1,4 +1,4 @@
-package arcadegame;
+package com.tactlessfish.connectfour;
 
 import java.awt.Container;
 import java.awt.BorderLayout;

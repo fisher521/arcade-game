@@ -1,4 +1,4 @@
-package arcadegame;// Represents current Game Stats
+package com.tactlessfish.connectfour;// Represents current Game Stats
 
 import java.awt.*;
 import javax.swing.*;
