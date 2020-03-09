@@ -1,16 +1,19 @@
 package com.tactlessfish.connectfour;
 
-import java.awt.Container;
-import java.awt.BorderLayout;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class Arcade extends JFrame {
-    public Arcade() {
+    public Arcade() throws IOException {
         super("AP Java Arcade");
 
-        JavaArcade game = new UserPanel(600, 450);
+        Properties properties = findProperties();
+
+        JavaArcade game = new UserPanel(600, 450, properties);
 
         //passing in a JavaArcade, therefore I know I can call getHighScore(), getScore()
         GameStats display = new GameStats(game);
@@ -31,7 +34,16 @@ public class Arcade extends JFrame {
         c.add(panel, BorderLayout.CENTER);
     }
 
-    public static void main(String[] args) {
+    private Properties findProperties() throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("config.properties");
+
+        Properties properties = new Properties();
+        properties.load(inputStream);
+        return properties;
+    }
+
+    public static void main(String[] args) throws IOException {
         Arcade window = new Arcade();
         window.setBounds(100, 100, 600, 600);
         window.setDefaultCloseOperation(EXIT_ON_CLOSE);

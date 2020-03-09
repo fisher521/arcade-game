@@ -13,6 +13,7 @@ package com.tactlessfish.connectfour;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Properties;
 
 public class UserPanel extends JPanel implements KeyListener, ActionListener, JavaArcade {
     private javax.swing.Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
@@ -25,7 +26,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     private int x, y;
     private int points = 0;
 
-    public UserPanel(int width, int height) {
+    public UserPanel(int width, int height, Properties properties) {
         Color backColor = Color.black;
 
         //Make checker proportional to height/width of panel.
@@ -44,6 +45,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     }
 
     //draws everything
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
