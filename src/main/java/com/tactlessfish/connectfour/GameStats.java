@@ -1,11 +1,17 @@
-package com.tactlessfish.connectfour;// Represents current Game Stats
+package com.tactlessfish.connectfour;
 
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Class representing current game stats.
+ */
 public class GameStats extends JPanel {
-    private JTextField gameNameText, currentHighScorer, currentHighScore;
+    private JTextField gameNameText;
+    private JTextField currentHighScorer;
+    private JTextField currentHighScore;
+
     private int yourScore;
     private JLabel yourScoreText;
     private JavaArcade game;
@@ -29,23 +35,19 @@ public class GameStats extends JPanel {
         add(yourScoreText);
         Font displayFont = new Font("Monospaced", Font.BOLD, 16);
         game = t;
-
     }
 
-
     public void update(int points) {
-
         yourScoreText.setText(" Your Score: " + points);
-
-
     }
 
     public void gameOver(int points) {
-
         if (points > Integer.parseInt(game.getHighScore())) {
             yourScoreText.setForeground(Color.BLUE);
-            String s = (String) JOptionPane.showInputDialog(this, "You are the new high scorer. Congratulations!\n Enter your name: ", "High Score", JOptionPane.PLAIN_MESSAGE, null, null, "name");
+            String s = (String) JOptionPane.showInputDialog(this,
+                    "You are the new high scorer. Congratulations!\n Enter your name: ",
+                    "High Score", JOptionPane.PLAIN_MESSAGE,
+                    null, null, "name");
         }
-
     }
 }
