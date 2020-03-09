@@ -38,4 +38,3 @@ public class Arcade extends JFrame {
         window.setVisible(true);
     }
 }
-
