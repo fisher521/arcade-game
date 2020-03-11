@@ -4,7 +4,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Checker extends Ellipse2D.Double {
     /**
-     * Constructs and initializes a <code>Checker</code> from the
+     * Constructs and initializes a Checker from the
      * specified coordinates.
      *
      * @param x the X coordinate of the upper-left corner
@@ -16,5 +16,9 @@ public class Checker extends Ellipse2D.Double {
      */
     public Checker(double x, double y, double w, double h) {
         super(x, y, w, h);
+    }
+
+    public enum CheckerState {
+        EMPTY, PLAYER1, PLAYER2
     }
 }

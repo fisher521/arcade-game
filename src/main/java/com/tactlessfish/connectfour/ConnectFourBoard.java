@@ -18,8 +18,8 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      * @param h the height of the newly constructed
      *          ConnectFourBoard
      */
-    public ConnectFourBoard(double x, double y, double w, double h, Checker[][] checkers) {
+    public ConnectFourBoard(double x, double y, double w, double h) {
         super(x, y, w, h);
-        this.checkers = checkers;
+        checkers = new Checker[6][7];
     }
 }
