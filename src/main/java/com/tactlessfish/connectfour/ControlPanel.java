@@ -48,37 +48,35 @@ public class ControlPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         JButton button = (JButton) e.getSource();
-        if (button == startButton) {
+        if (button.equals(startButton)) {
             if (!game.isRunning()) {
                 ((JPanel) (game)).requestFocus(); //need to provide the JPanel focus
                 game.startGame();
                 gStats.update(0);
                 gStats.repaint();
             }
-        } else if (button == pauseButton) {
+        } else if (button.equals(pauseButton)) {
             game.pauseGame();
             startButton.setText("Resume");
             startButton.setEnabled(true);
             repaint();
 
-        } else if (button == stopButton) {
+        } else if (button.equals(stopButton)) {
             game.stopGame();
             gStats.gameOver(game.getPoints());
             gStats.repaint();
             startButton.setEnabled(true);
             startButton.setText("Restart");
             repaint();
-        } else if (button == creditsButton) {
+        } else if (button.equals(creditsButton)) {
             String credits = game.getCredits();
             JOptionPane.showMessageDialog(this, credits, "Game Credits", JOptionPane.PLAIN_MESSAGE);
 
-        } else if (button == instructionsButton) {
+        } else if (button.equals(instructionsButton)) {
             String instructions = game.getInstructions();
             JOptionPane.showMessageDialog(this, instructions, "Game Rules", JOptionPane.PLAIN_MESSAGE);
 
         }
         ((JPanel) (game)).requestFocus();
     }
-
 }
-

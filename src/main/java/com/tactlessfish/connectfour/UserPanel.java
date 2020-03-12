@@ -32,8 +32,8 @@ import java.util.Properties;
 public class UserPanel extends JPanel implements KeyListener, ActionListener, JavaArcade {
     private static Properties properties = Arcade.getProperties();
 
-    private javax.swing.Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
-    private javax.swing.Timer pointsTimer; //controls how often our points value change
+    private Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
+    private Timer pointsTimer; //controls how often our points value change
     private ConnectFourBoard connectFourBoard;
 
     private boolean running = false;
@@ -51,7 +51,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
                 boardWidth, boardHeight, checkerDiameter);
 
         // Status check every 50 milliseconds
-        timer = new javax.swing.Timer(50, this);
+        timer = new Timer(50, this);
 
         addKeyListener(this); //used for key controls
 
