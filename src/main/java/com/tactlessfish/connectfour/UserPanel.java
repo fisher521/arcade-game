@@ -19,27 +19,29 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     private javax.swing.Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
     private javax.swing.Timer pointsTimer; //controls how often our points value change
 
+    private static Properties properties = Arcade.getProperties();
+
     private int checkerDiameter;
-    private Checker[][] checkerGrid;
+    private ConnectFourBoard connectFourBoard;
 
     private boolean start = true;
     private int x, y;
     private int points = 0;
 
-    public UserPanel(int width, int height, Properties properties) {
-        Color backColor = Color.black;
+    public UserPanel(int width, int height) {
 
-        //Make checker proportional to height/width of panel.
-        checkerDiameter = getHeight() / 20;
+        // Make checker proportional to height/width of panel.
+        checkerDiameter = getHeight() / 5;
+        connectFourBoard = new ConnectFourBoard(0, 0, width/2, height/2, checkerDiameter);
 
-        //Status check every 50 milliseconds
+        // Status check every 50 milliseconds
         timer = new javax.swing.Timer(50, this);
 
         addKeyListener(this);//used for key controls
 
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        setBackground(backColor);
+        setBackground(Color.decode(properties.getProperty("backgroundColor")));
 
         setPreferredSize(new Dimension(width, height));
     }
@@ -50,9 +52,10 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
 
-        //TODO draw checkers
+        connectFourBoard.drawAll(graphics2D);
 
-        g.setColor(Color.white);
+        g.setColor(Color.decode(properties.getProperty("paragraphColor")));
+        g.setFont(Font.getFont(properties.getProperty("paragraphFont")));
         g.drawString("Points: " + points, 20, getHeight() - 30);
 
         if (!start) { //shows instructions in the beginning

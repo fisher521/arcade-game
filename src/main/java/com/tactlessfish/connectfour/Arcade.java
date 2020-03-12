@@ -8,12 +8,14 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Arcade extends JFrame {
+    private static Properties properties;
+
     public Arcade() throws IOException {
         super("AP Java Arcade");
 
-        Properties properties = findProperties();
+        properties = initializeProperties();
 
-        JavaArcade game = new UserPanel(600, 450, properties);
+        JavaArcade game = new UserPanel(600, 450);
 
         //passing in a JavaArcade, therefore I know I can call getHighScore(), getScore()
         GameStats display = new GameStats(game);
@@ -34,12 +36,16 @@ public class Arcade extends JFrame {
         c.add(panel, BorderLayout.CENTER);
     }
 
-    private Properties findProperties() throws IOException {
+    private Properties initializeProperties() throws IOException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("config.properties");
 
         Properties properties = new Properties();
         properties.load(inputStream);
+        return properties;
+    }
+
+    public static Properties getProperties() {
         return properties;
     }
 

@@ -1,8 +1,14 @@
 package com.tactlessfish.connectfour;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.Properties;
 
 public class ConnectFourBoard extends Rectangle2D.Double {
+    private static Properties properties = Arcade.getProperties();
+
+    private static final int ROWS = 6;
+    private static final int COLUMNS = 7;
     private Checker[][] checkers;
 
     /**
@@ -18,8 +24,28 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      * @param h the height of the newly constructed
      *          ConnectFourBoard
      */
-    public ConnectFourBoard(double x, double y, double w, double h) {
+    public ConnectFourBoard(double x, double y, double w, double h, int checkerDiameter) {
         super(x, y, w, h);
-        checkers = new Checker[6][7];
+
+        checkers = new Checker[ROWS][COLUMNS];
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLUMNS; col++) {
+                // TODO implement x and y
+                checkers[row][col] = new Checker(0,0,
+                        checkerDiameter, checkerDiameter, Checker.CheckerType.EMPTY);
+            }
+        }
+    }
+
+    public void drawAll(Graphics2D graphics2D) {
+        graphics2D.setColor(Color.YELLOW);
+        graphics2D.fill(this);
+
+        for (Checker[] row : checkers) {
+            for (Checker checker : row) {
+                graphics2D.setColor(checker.getColor());
+                graphics2D.fill(checker);
+            }
+        }
     }
 }
