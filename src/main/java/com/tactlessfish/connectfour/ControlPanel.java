@@ -48,7 +48,6 @@ public class ControlPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         JButton button = (JButton) e.getSource();
-
         if (button == startButton) {
             if (!game.isRunning()) {
                 ((JPanel) (game)).requestFocus(); //need to provide the JPanel focus

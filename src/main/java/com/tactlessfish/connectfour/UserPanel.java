@@ -1,13 +1,27 @@
-/**
- * @(#)UserPanel.java Simplified version of the SpaceInvaders UserPanel to show motion.
- * The two enemy objects move methods are called every 50 ms in response to a timer.
- * repaint() is called in response to that timer.  This call causes paintComponent to
- * be called.  paintComponent redraws the panel.
- * <p>
- * The hero move method is called in response to the mouse events.
- * @author
- * @version 1.00 2016/2/5
+/*
+ * MIT License
+ *
+ * Copyright (c) 2020 Fisher Sun
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
+
 package com.tactlessfish.connectfour;
 
 import javax.swing.*;
@@ -16,28 +30,30 @@ import java.awt.event.*;
 import java.util.Properties;
 
 public class UserPanel extends JPanel implements KeyListener, ActionListener, JavaArcade {
-    private javax.swing.Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
-    private javax.swing.Timer pointsTimer; //controls how often our points value change
-
     private static Properties properties = Arcade.getProperties();
 
-    private int checkerDiameter;
+    private javax.swing.Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
+    private javax.swing.Timer pointsTimer; //controls how often our points value change
     private ConnectFourBoard connectFourBoard;
 
-    private boolean start = true;
-    private int x, y;
+    private boolean running = false;
+    private int x;
+    private int y;
     private int points = 0;
 
     public UserPanel(int width, int height) {
-
         // Make checker proportional to height/width of panel.
-        checkerDiameter = getHeight() / 5;
-        connectFourBoard = new ConnectFourBoard(0, 0, width/2, height/2, checkerDiameter);
+        double boardHeight = height / 1.25;
+        double boardWidth = boardHeight * (ConnectFourBoard.getCOLUMNS() / (double) ConnectFourBoard.getROWS());
+        double checkerDiameter = (boardHeight / (double) ConnectFourBoard.getROWS()) * 0.67;
+
+        connectFourBoard = new ConnectFourBoard(width / 2.0 - boardWidth / 2.0, height / 2.0 - boardHeight / 2.0,
+                boardWidth, boardHeight, checkerDiameter);
 
         // Status check every 50 milliseconds
         timer = new javax.swing.Timer(50, this);
 
-        addKeyListener(this);//used for key controls
+        addKeyListener(this); //used for key controls
 
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -58,7 +74,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
         g.setFont(Font.getFont(properties.getProperty("paragraphFont")));
         g.drawString("Points: " + points, 20, getHeight() - 30);
 
-        if (!start) { //shows instructions in the beginning
+        if (!running) { //shows instructions in the beginning
             g.drawString("Instructions: ... write stuff here", (getWidth() / 2) - 100, getHeight() / 2 + 20);
             g.drawString("(Inactive) Press enter to shoot .", (getWidth() / 2) - 100, getHeight() / 2 + 40);
             g.drawString("You have 3 lives to kill the enemy", (getWidth() / 2) - 100, getHeight() / 2 + 60);
@@ -74,7 +90,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
      */
     @Override
     public boolean isRunning() {
-        return false;
+        return running;
     }
 
     /**
@@ -83,7 +99,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
      */
     @Override
     public void startGame() {
-
+        running = true;
     }
 
     /**
@@ -215,6 +231,3 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     }
     //</editor-fold>
 }
-
-
-

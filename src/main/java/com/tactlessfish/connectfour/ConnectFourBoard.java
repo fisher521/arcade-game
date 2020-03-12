@@ -24,7 +24,7 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      * @param h the height of the newly constructed
      *          ConnectFourBoard
      */
-    public ConnectFourBoard(double x, double y, double w, double h, int checkerDiameter) {
+    public ConnectFourBoard(double x, double y, double w, double h, double checkerDiameter) {
         super(x, y, w, h);
 
         checkers = new Checker[ROWS][COLUMNS];
@@ -38,7 +38,7 @@ public class ConnectFourBoard extends Rectangle2D.Double {
     }
 
     public void drawAll(Graphics2D graphics2D) {
-        graphics2D.setColor(Color.YELLOW);
+        graphics2D.setColor(Color.decode(properties.getProperty("boardColor")));
         graphics2D.fill(this);
 
         for (Checker[] row : checkers) {
@@ -47,5 +47,13 @@ public class ConnectFourBoard extends Rectangle2D.Double {
                 graphics2D.fill(checker);
             }
         }
+    }
+
+    public static int getROWS() {
+        return ROWS;
+    }
+
+    public static int getCOLUMNS() {
+        return COLUMNS;
     }
 }
