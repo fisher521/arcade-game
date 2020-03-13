@@ -50,7 +50,7 @@ public class GameStats extends JPanel {
     public GameStats(JavaArcade javaArcade) {
         super(new GridLayout(2, 4, 10, 0));
         setBorder(new EmptyBorder(0, 0, 5, 0));
-        Font gameNameFont = new Font(properties.getProperty("titleFont"), Font.BOLD, 24);
+        Font gameNameFont = new Font(properties.getProperty("titleFont"), Font.BOLD, 32);
 
         JLabel gName = new JLabel(" " + javaArcade.getGameName());
 
