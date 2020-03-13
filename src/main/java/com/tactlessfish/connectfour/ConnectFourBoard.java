@@ -9,6 +9,8 @@ public class ConnectFourBoard extends Rectangle2D.Double {
 
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;
+    private static final double CHECKER_CELL_RATIO = 0.667;
+
     private Checker[][] checkers;
 
     /**
@@ -27,15 +29,15 @@ public class ConnectFourBoard extends Rectangle2D.Double {
     public ConnectFourBoard(double x, double y, double w, double h) {
         super(x, y, w, h);
 
-        double cellWidth = getWidth() / COLUMNS;
-        double cellHeight = getHeight() / ROWS;
-        double checkerDiameter = cellHeight * 0.67;
+        double cellDiameter = getHeight() / ROWS;
+        double checkerDiameter = cellDiameter * CHECKER_CELL_RATIO;
+        double circleShift = (1 - (1 - CHECKER_CELL_RATIO) / 2) * cellDiameter;
 
         checkers = new Checker[ROWS][COLUMNS];
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
-                double checkerX = getX() + (cellWidth * col) - (0.67 * cellWidth);
-                double checkerY = getY() + (cellHeight * row) - (0.67 * cellHeight);
+                double checkerX = getX() + (cellDiameter * (col + 1)) - circleShift;
+                double checkerY = getY() + (cellDiameter * (row + 1)) - circleShift;
 
                 checkers[row][col] = new Checker(checkerX, checkerY,
                         checkerDiameter, checkerDiameter);
