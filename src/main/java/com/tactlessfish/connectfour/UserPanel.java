@@ -109,7 +109,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
      */
     @Override
     public String getGameName() {
-        return null;
+        return "Connect Four";
     }
 
     /**
