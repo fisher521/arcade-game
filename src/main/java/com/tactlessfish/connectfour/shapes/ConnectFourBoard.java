@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
-package com.tactlessfish.connectfour;
+package com.tactlessfish.connectfour.shapes;
+
+import com.tactlessfish.connectfour.ConnectFour;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Properties;
 
 public class ConnectFourBoard extends Rectangle2D.Double {
-    private static Properties properties = Arcade.getProperties();
+    private static Properties properties = ConnectFour.getProperties();
 
     private static final int ROWS = 6;
     private static final int COLUMNS = 7;

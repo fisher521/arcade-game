@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
-package com.tactlessfish.connectfour;
+package com.tactlessfish.connectfour.panels;
+
+import com.tactlessfish.connectfour.ConnectFour;
+import com.tactlessfish.connectfour.interfaces.JavaArcade;
+import com.tactlessfish.connectfour.shapes.ConnectFourBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +34,7 @@ import java.awt.event.*;
 import java.util.Properties;
 
 public class UserPanel extends JPanel implements KeyListener, ActionListener, JavaArcade {
-    private static Properties properties = Arcade.getProperties();
+    private static Properties properties = ConnectFour.getProperties();
 
     private Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
     private Timer pointsTimer; //controls how often our points value change
