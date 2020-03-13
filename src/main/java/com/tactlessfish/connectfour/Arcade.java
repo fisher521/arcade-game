@@ -1,11 +1,13 @@
 package com.tactlessfish.connectfour;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class Arcade extends JFrame {
     private static Properties properties;
@@ -16,14 +18,10 @@ public class Arcade extends JFrame {
         properties = initializeProperties();
 
         JavaArcade game = new UserPanel(600, 450);
-
-        //passing in a JavaArcade, therefore I know I can call getHighScore(), getScore()
         GameStats display = new GameStats(game);
-
-        //Also passing in JavaArcade to ControlPanel, I know you will respond to buttons
+        // Passing in a JavaArcade to ControlPanel allows response to buttons
         ControlPanel controls = new ControlPanel(game, display);
-
-        game.setDisplay(display); //provides game ability to update display
+        game.setDisplay(display); // Provides game ability to update display
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
