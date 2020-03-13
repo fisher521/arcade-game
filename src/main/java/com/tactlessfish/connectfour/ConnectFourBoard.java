@@ -24,15 +24,21 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      * @param h the height of the newly constructed
      *          ConnectFourBoard
      */
-    public ConnectFourBoard(double x, double y, double w, double h, double checkerDiameter) {
+    public ConnectFourBoard(double x, double y, double w, double h) {
         super(x, y, w, h);
+
+        double cellWidth = getWidth() / COLUMNS;
+        double cellHeight = getHeight() / ROWS;
+        double checkerDiameter = cellHeight * 0.67;
 
         checkers = new Checker[ROWS][COLUMNS];
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLUMNS; col++) {
-                // TODO implement x and y
-                checkers[row][col] = new Checker(0,0,
-                        checkerDiameter, checkerDiameter, Checker.CheckerType.EMPTY);
+                double checkerX = getX() + (cellWidth * col) - (0.67 * cellWidth);
+                double checkerY = getY() + (cellHeight * row) - (0.67 * cellHeight);
+
+                checkers[row][col] = new Checker(checkerX, checkerY,
+                        checkerDiameter, checkerDiameter);
             }
         }
     }

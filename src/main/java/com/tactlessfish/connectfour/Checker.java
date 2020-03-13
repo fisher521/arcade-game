@@ -5,12 +5,12 @@ import java.awt.geom.Ellipse2D;
 import java.util.Properties;
 
 public class Checker extends Ellipse2D.Double {
-    private CheckerType type;
     private static Properties properties = Arcade.getProperties();
+    private CheckerType type;
 
     /**
      * Constructs and initializes a Checker from the
-     * specified coordinates.
+     * specified coordinates, with type EMPTY.
      *
      * @param x the X coordinate of the upper-left corner
      *          of the framing rectangle
@@ -19,9 +19,9 @@ public class Checker extends Ellipse2D.Double {
      * @param w the width of the framing rectangle
      * @param h the height of the framing rectangle
      */
-    public Checker(double x, double y, double w, double h, CheckerType type) {
+    public Checker(double x, double y, double w, double h) {
         super(x, y, w, h);
-        this.type = type;
+        type = CheckerType.EMPTY;
     }
 
     public Color getColor() {

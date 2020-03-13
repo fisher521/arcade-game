@@ -42,13 +42,11 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     private int points = 0;
 
     public UserPanel(int width, int height) {
-        // Make checker proportional to height/width of panel.
+        // Make board proportional to height/width of panel.
         double boardHeight = height / 1.25;
         double boardWidth = boardHeight * (ConnectFourBoard.getCOLUMNS() / (double) ConnectFourBoard.getROWS());
-        double checkerDiameter = (boardHeight / (double) ConnectFourBoard.getROWS()) * 0.67;
-
         connectFourBoard = new ConnectFourBoard(width / 2.0 - boardWidth / 2.0, height / 2.0 - boardHeight / 2.0,
-                boardWidth, boardHeight, checkerDiameter);
+                boardWidth, boardHeight);
 
         // Status check every 50 milliseconds
         timer = new Timer(50, this);
