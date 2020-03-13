@@ -28,6 +28,14 @@ public class Checker extends Ellipse2D.Double {
         return type.getColor();
     }
 
+    public CheckerType getType() {
+        return type;
+    }
+
+    public void setType(CheckerType type) {
+        this.type = type;
+    }
+
     public enum CheckerType {
         EMPTY(Color.decode(properties.getProperty("backgroundColor"))),
         PLAYER1(Color.decode(properties.getProperty("p1Color"))),
