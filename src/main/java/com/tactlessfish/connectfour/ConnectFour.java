@@ -23,20 +23,20 @@ public class ConnectFour extends JFrame {
         properties = initializeProperties();
 
         JavaArcade game = new UserPanel(600, 450);
-        GameStats display = new GameStats(game);
+        GameStats gameStats = new GameStats(game);
         // Passing in a JavaArcade to ControlPanel allows response to buttons
-        ControlPanel controls = new ControlPanel(game, display);
-        game.setDisplay(display); // Provides game ability to update display
+        ControlPanel controlPanel = new ControlPanel(game, gameStats);
+        game.setDisplay(gameStats); // Provides game ability to update gameStats
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBorder(new EmptyBorder(0, 5, 0, 5));
-        panel.add(display, BorderLayout.NORTH);
+        panel.add(gameStats, BorderLayout.NORTH);
         panel.add((JPanel) game, BorderLayout.CENTER);
-        panel.add(controls, BorderLayout.SOUTH);
+        panel.add(controlPanel, BorderLayout.SOUTH);
 
-        Container c = getContentPane();
-        c.add(panel, BorderLayout.CENTER);
+        Container contentPane = getContentPane();
+        contentPane.add(panel, BorderLayout.CENTER);
     }
 
     private Properties initializeProperties() throws IOException {
