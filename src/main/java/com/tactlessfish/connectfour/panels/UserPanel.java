@@ -34,11 +34,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Properties;
 
-public class UserPanel extends JPanel implements KeyListener, ActionListener, JavaArcade {
+public class UserPanel extends JPanel implements KeyListener, JavaArcade {
     private static Properties properties = ConnectFour.getProperties();
 
-    private Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
-    private Timer pointsTimer; //controls how often our points value change
     private ConnectFourBoard connectFourBoard;
     private Pointer pointer;
 
@@ -59,9 +57,6 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
         pointer = new Pointer(connectFourBoard.getX(), connectFourBoard.getY() - pointerHeight,
                 pointerWidth, pointerHeight);
 
-        // Status check every 50 milliseconds
-        timer = new Timer(50, this);
-
         addKeyListener(this); //used for key controls
 
         setFocusable(true);
@@ -79,16 +74,6 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
 
         connectFourBoard.drawAll(graphics2D);
         pointer.drawAll(graphics2D);
-
-        g.setColor(Color.decode(properties.getProperty("paragraphColor")));
-        g.setFont(Font.getFont(properties.getProperty("paragraphFont")));
-        g.drawString("Points: " + points, 20, getHeight() - 30);
-
-        if (!running) { //shows instructions in the beginning
-            g.drawString("Instructions: ... write stuff here", (getWidth() / 2) - 100, getHeight() / 2 + 20);
-            g.drawString("(Inactive) Press enter to shoot .", (getWidth() / 2) - 100, getHeight() / 2 + 40);
-            g.drawString("You have 3 lives to kill the enemy", (getWidth() / 2) - 100, getHeight() / 2 + 60);
-        }
     }
 
     //<editor-fold desc="JavaArcade">
@@ -191,18 +176,6 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     }
     //</editor-fold>
 
-    //<editor-fold desc="ActionListener">
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-    //</editor-fold>
-
     //<editor-fold desc="KeyListener">
     /**
      * Invoked when a key has been typed.
@@ -225,7 +198,15 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                pointer.moveLeft();
+                break;
+            case KeyEvent.VK_RIGHT:
+                pointer.moveRight();
+                break;
+        }
+        repaint();
     }
 
     /**
