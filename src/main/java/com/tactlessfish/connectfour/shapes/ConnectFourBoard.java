@@ -129,8 +129,9 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      */
     private String getHorizontalString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int col = 0; col < COLUMNS; col++) {
-            stringBuilder.append(checkers[latestRow][col]);
+
+        for (Checker checker : checkers[latestRow]) {
+            stringBuilder.append(checker);
         }
         return stringBuilder.toString();
     }
@@ -140,6 +141,7 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      */
     private String getColumnString() {
         StringBuilder stringBuilder = new StringBuilder();
+
         for (int row = 0; row < ROWS; row++) {
             stringBuilder.append(checkers[row][latestCol]);
         }
