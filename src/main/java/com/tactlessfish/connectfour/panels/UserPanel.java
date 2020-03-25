@@ -124,7 +124,10 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public String getInstructions() {
-        return null;
+        return "Move using the arrow keys and drop a checker with space. " +
+                "\ntake turns dropping checkers until a player wins." +
+                "\n\nA player wins when they connect four of their pieces" +
+                "\nhorizontally, vertically, or diagonally.";
     }
 
     /**
