@@ -32,7 +32,9 @@ import java.util.Properties;
 
 public class Pointer extends Rectangle2D.Double {
     private static Properties properties = ConnectFour.getProperties();
+    private Polygon triangle;
     private boolean isP1;
+    private int col;
 
     /**
      * Constructs and initializes a Pointer
@@ -50,15 +52,12 @@ public class Pointer extends Rectangle2D.Double {
      */
     public Pointer(double x, double y, double w, double h) {
         super(x, y, w, h);
+        triangle = constructTriangle();
         isP1 = true;
+        col = 0;
     }
 
-    public void drawAll(Graphics2D graphics2D) {
-        Color pointerColor = Color.decode(properties.getProperty("boardColor"));
-        graphics2D.setColor(pointerColor);
-        graphics2D.fill(this);
-
-        graphics2D.setColor(Color.decode(properties.getProperty(isP1 ? "p1Color" : "p2Color")));
+    public Polygon constructTriangle() {
         double triangleYOffset = getHeight() / 4.0;
         double triangleXOffset = getWidth() / 4.0;
         int[] triangleXCoordinates = {
@@ -69,6 +68,49 @@ public class Pointer extends Rectangle2D.Double {
                 (int) (getCenterY() + triangleYOffset),
                 (int) (getCenterY() - triangleYOffset),
                 (int) (getCenterY() - triangleYOffset)};
-        graphics2D.fillPolygon(triangleXCoordinates, triangleYCoordinates, 3);
+        return new Polygon(triangleXCoordinates, triangleYCoordinates, 3);
+    }
+
+    public void drawAll(Graphics2D graphics2D) {
+        Color pointerColor = Color.decode(properties.getProperty("boardColor"));
+        graphics2D.setColor(pointerColor);
+        graphics2D.fill(this);
+
+        graphics2D.setColor(Color.decode(properties.getProperty(isP1 ? "p1Color" : "p2Color")));
+        graphics2D.fillPolygon(triangle);
+    }
+
+    public boolean moveLeft() {
+        if (col == 0) {
+            return false;
+        }
+
+        setRect(getX() - getWidth(), getY(), getWidth(), getHeight());
+        triangle.translate((int) -getWidth(), 0);
+        col--;
+        return true;
+    }
+
+    public boolean moveRight() {
+        if (col == ConnectFourBoard.getCOLUMNS() - 1) {
+            return false;
+        }
+
+        setRect(getX() + getWidth(), getY(), getWidth(), getHeight());
+        triangle.translate((int) getWidth(), 0);
+        col++;
+        return true;
+    }
+
+    public void changePlayer() {
+        isP1 = !isP1;
+    }
+
+    public boolean isP1() {
+        return isP1;
+    }
+
+    public int getCol() {
+        return col;
     }
 }
