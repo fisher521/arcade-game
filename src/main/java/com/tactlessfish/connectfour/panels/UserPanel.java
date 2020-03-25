@@ -137,7 +137,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public String getCredits() {
-        return "Fisher Sun";
+        return "Created by Fisher Sun.";
     }
 
     /**
