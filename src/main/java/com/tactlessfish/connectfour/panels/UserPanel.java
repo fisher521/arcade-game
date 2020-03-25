@@ -36,6 +36,7 @@ import java.util.Properties;
 
 public class UserPanel extends JPanel implements KeyListener, JavaArcade {
     private static Properties properties = ConnectFour.getProperties();
+    private GameStats gameStats;
 
     private ConnectFourBoard connectFourBoard;
     private Pointer pointer;
@@ -172,7 +173,8 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public void setDisplay(GameStats d) {
-
+        gameStats = d;
+        d.update(getPoints());
     }
     //</editor-fold>
 
