@@ -120,8 +120,8 @@ public class ConnectFourBoard extends Rectangle2D.Double {
 
         return getHorizontalString().contains(fourInARow)
                 || getColumnString().contains(fourInARow)
-                || getSlashDiagonalString().contains(fourInARow)
-                || getBackslashDiagonalString().contains(fourInARow);
+                || getDiagonalString(true).contains(fourInARow)
+                || getDiagonalString(false).contains(fourInARow);
     }
 
     /**
@@ -147,36 +147,21 @@ public class ConnectFourBoard extends Rectangle2D.Double {
     }
 
     /**
-     * @return string representation of the "/" diagonal containing the latest checker
+     * @param isLeftToRight true if moving left to right "/", false if moving right to left "\"
+     * @return string representation of a diagonal containing the latest checker
      */
-    private String getSlashDiagonalString() {
+    private String getDiagonalString(boolean isLeftToRight) {
         StringBuilder stringBuilder = new StringBuilder(ROWS);
 
         for (int row = ROWS - 1; row >= 0; row--) {
-            int col = latestCol + latestRow - row;
+            int col = isLeftToRight
+                    ? latestCol + latestRow - row
+                    : latestCol - latestRow + row;
 
             if (col >= 0 && col < COLUMNS) {
                 stringBuilder.append(checkers[row][col]);
             }
         }
-
-        return stringBuilder.toString();
-    }
-
-    /**
-     * @return string representation of the "\" diagonal containing the latest checker
-     */
-    private String getBackslashDiagonalString() {
-        StringBuilder stringBuilder = new StringBuilder(ROWS);
-
-        for (int row = ROWS - 1; row >= 0; row--) {
-            int col = latestCol - latestRow + row;
-
-            if (col >= 0 && col < COLUMNS) {
-                stringBuilder.append(checkers[row][col]);
-            }
-        }
-
         return stringBuilder.toString();
     }
 
