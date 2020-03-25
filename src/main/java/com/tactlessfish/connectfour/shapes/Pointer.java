@@ -80,15 +80,37 @@ public class Pointer extends Rectangle2D.Double {
         graphics2D.fillPolygon(triangle);
     }
 
-    public void moveLeft() {
+    public boolean moveLeft() {
+        if (col == 0) {
+            return false;
+        }
+
         setRect(getX() - getWidth(), getY(), getWidth(), getHeight());
         triangle.translate((int) -getWidth(), 0);
         col--;
+        return true;
     }
 
-    public void moveRight() {
+    public boolean moveRight() {
+        if (col == ConnectFourBoard.getCOLUMNS() - 1) {
+            return false;
+        }
+
         setRect(getX() + getWidth(), getY(), getWidth(), getHeight());
         triangle.translate((int) getWidth(), 0);
         col++;
+        return true;
+    }
+
+    public void changePlayer() {
+        isP1 = !isP1;
+    }
+
+    public boolean isP1() {
+        return isP1;
+    }
+
+    public int getCol() {
+        return col;
     }
 }

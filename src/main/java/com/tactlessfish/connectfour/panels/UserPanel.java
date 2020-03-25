@@ -198,15 +198,23 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        boolean updated = false;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                pointer.moveLeft();
+                updated = pointer.moveLeft();
                 break;
             case KeyEvent.VK_RIGHT:
-                pointer.moveRight();
+                updated = pointer.moveRight();
+                break;
+            case KeyEvent.VK_SPACE:
+                updated = connectFourBoard.placeChecker(pointer.isP1(), pointer.getCol());
+                pointer.changePlayer();
                 break;
         }
-        repaint();
+
+        if (updated) {
+            repaint();
+        }
     }
 
     /**
