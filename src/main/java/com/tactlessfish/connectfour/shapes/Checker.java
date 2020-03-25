@@ -62,6 +62,18 @@ public class Checker extends Ellipse2D.Double {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        switch (type) {
+            case PLAYER1:
+                return "1";
+            case PLAYER2:
+                return "2";
+            default:
+                return " ";
+        }
+    }
+
     public enum CheckerType {
         EMPTY(Color.decode(properties.getProperty("backgroundColor"))),
         PLAYER1(Color.decode(properties.getProperty("p1Color"))),
