@@ -27,6 +27,7 @@ package com.tactlessfish.connectfour.panels;
 import com.tactlessfish.connectfour.ConnectFour;
 import com.tactlessfish.connectfour.interfaces.JavaArcade;
 import com.tactlessfish.connectfour.shapes.ConnectFourBoard;
+import com.tactlessfish.connectfour.shapes.Pointer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +40,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
     private Timer timer; //controls how often we updated the x, y pos of enemies and how often we repaint
     private Timer pointsTimer; //controls how often our points value change
     private ConnectFourBoard connectFourBoard;
+    private Pointer pointer;
 
     private boolean running = false;
     private int x;
@@ -51,6 +53,11 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
         double boardWidth = boardHeight * (ConnectFourBoard.getCOLUMNS() / (double) ConnectFourBoard.getROWS());
         connectFourBoard = new ConnectFourBoard(width / 2.0 - boardWidth / 2.0, height / 2.0 - boardHeight / 2.0,
                 boardWidth, boardHeight);
+
+        double pointerWidth = connectFourBoard.getCellDiameter();
+        double pointerHeight = pointerWidth / 3.0;
+        pointer = new Pointer(connectFourBoard.getX(), connectFourBoard.getY() - pointerHeight,
+                pointerWidth, pointerHeight);
 
         // Status check every 50 milliseconds
         timer = new Timer(50, this);
@@ -71,6 +78,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
         Graphics2D graphics2D = (Graphics2D) g;
 
         connectFourBoard.drawAll(graphics2D);
+        pointer.drawAll(graphics2D);
 
         g.setColor(Color.decode(properties.getProperty("paragraphColor")));
         g.setFont(Font.getFont(properties.getProperty("paragraphFont")));
@@ -140,7 +148,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
      */
     @Override
     public String getCredits() {
-        return null;
+        return "Fisher Sun";
     }
 
     /**
@@ -173,7 +181,7 @@ public class UserPanel extends JPanel implements KeyListener, ActionListener, Ja
 
     /**
      * This method provides access to GameStats display for UserPanel to pass information to update score.
-     * GameStats is created in Arcade; a reference should be passed to UserPanel (main panel) to update points.
+     * GameStats is created in ConnectFour; a reference should be passed to UserPanel (main panel) to update points.
      *
      * @param d
      */
