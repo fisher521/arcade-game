@@ -40,6 +40,9 @@ public class ConnectFourBoard extends Rectangle2D.Double {
     private double cellDiameter;
     private Checker[][] checkers;
 
+    private int latestRow;
+    private int latestCol;
+
     /**
      * Constructs and initializes a ConnectFourBoard
      * from the specified double coordinates.
@@ -72,6 +75,11 @@ public class ConnectFourBoard extends Rectangle2D.Double {
         }
     }
 
+    /**
+     * Draws the board and all checkers.
+     *
+     * @param graphics2D Graphics2D object used to draw
+     */
     public void drawAll(Graphics2D graphics2D) {
         graphics2D.setColor(Color.decode(properties.getProperty("boardColor")));
         graphics2D.fill(this);
@@ -82,6 +90,94 @@ public class ConnectFourBoard extends Rectangle2D.Double {
                 graphics2D.fill(checker);
             }
         }
+    }
+
+
+    /**
+     * Places a checker on the bottommost row of a specified column.
+     *
+     * @param isP1 if player placing the checker is P1
+     * @param col  the column to place the checker
+     * @return true if successful, false if unsuccessful
+     */
+    public boolean placeChecker(boolean isP1, int col) {
+        for (int row = ROWS - 1; row >= 0; row--) {
+            if (checkers[row][col].getType() == Checker.CheckerType.EMPTY) {
+                checkers[row][col].setType(isP1
+                        ? Checker.CheckerType.PLAYER1
+                        : Checker.CheckerType.PLAYER2);
+                latestRow = row;
+                latestCol = col;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkWin() {
+        String player = checkers[latestRow][latestCol].toString();
+        String fourInARow = String.join("", player, player, player, player);
+
+        return getHorizontalString().contains(fourInARow)
+                || getColumnString().contains(fourInARow)
+                || getSlashDiagonalString().contains(fourInARow)
+                || getBackslashDiagonalString().contains(fourInARow);
+    }
+
+    /**
+     * @return string representation of the row containing the latest checker
+     */
+    private String getHorizontalString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int col = 0; col < COLUMNS; col++) {
+            stringBuilder.append(checkers[latestRow][col]);
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return string representation of the column containing the latest checker
+     */
+    private String getColumnString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int row = 0; row < ROWS; row++) {
+            stringBuilder.append(checkers[row][latestCol]);
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return string representation of the "/" diagonal containing the latest checker
+     */
+    private String getSlashDiagonalString() {
+        StringBuilder stringBuilder = new StringBuilder(ROWS);
+
+        for (int row = ROWS - 1; row >= 0; row--) {
+            int col = latestCol + latestRow - row;
+
+            if (col >= 0 && col < COLUMNS) {
+                stringBuilder.append(checkers[row][col]);
+            }
+        }
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return string representation of the "\" diagonal containing the latest checker
+     */
+    private String getBackslashDiagonalString() {
+        StringBuilder stringBuilder = new StringBuilder(ROWS);
+
+        for (int row = ROWS - 1; row >= 0; row--) {
+            int col = latestCol - latestRow + row;
+
+            if (col >= 0 && col < COLUMNS) {
+                stringBuilder.append(checkers[row][col]);
+            }
+        }
+
+        return stringBuilder.toString();
     }
 
     public static int getROWS() {
