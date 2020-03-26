@@ -86,10 +86,8 @@ public class ControlPanel extends JPanel implements ActionListener {
             startButton.setText("Resume");
             startButton.setEnabled(true);
             repaint();
-
         } else if (button.equals(stopButton)) {
             game.stopGame();
-            gStats.gameOver(game.getPoints());
             gStats.repaint();
             startButton.setEnabled(true);
             startButton.setText("Restart");
@@ -97,11 +95,9 @@ public class ControlPanel extends JPanel implements ActionListener {
         } else if (button.equals(creditsButton)) {
             String credits = game.getCredits();
             JOptionPane.showMessageDialog(this, credits, "Game Credits", JOptionPane.PLAIN_MESSAGE);
-
         } else if (button.equals(instructionsButton)) {
             String instructions = game.getInstructions();
             JOptionPane.showMessageDialog(this, instructions, "Game Rules", JOptionPane.PLAIN_MESSAGE);
-
         }
         ((JPanel) (game)).requestFocus();
     }
