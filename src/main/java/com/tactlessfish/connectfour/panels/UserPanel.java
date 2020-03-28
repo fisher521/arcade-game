@@ -102,8 +102,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         pointer.drawAll(graphics2D);
     }
 
-    //<editor-fold desc="JavaArcade">
-
     /**
      * This method should return true if your game is in a "start" state, and it should return false if
      * your game is in a "paused" state or "stopped" or "unstarted".
@@ -213,9 +211,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         gameStats = d;
         d.update(getPoints());
     }
-    //</editor-fold>
-
-    //<editor-fold desc="KeyListener">
 
     /**
      * Invoked when a key has been typed.
@@ -226,7 +221,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public void keyTyped(KeyEvent e) {
-
+        // Unused
     }
 
     /**
@@ -299,7 +294,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-
+        // Unused
     }
-    //</editor-fold>
 }
