@@ -43,6 +43,8 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
     private Pointer pointer;
 
     private boolean isRunning = true;
+    private boolean isCompletedGame;
+
     private int checkersPlaced = 0;
     private String highScore;
 
@@ -60,6 +62,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         pointer = constructPointer();
 
         highScore = readHighScore();
+        isCompletedGame = false;
     }
 
     private ConnectFourBoard constructBoard() {
@@ -179,7 +182,9 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      */
     @Override
     public void stopGame() {
-        gameStats.gameOver(checkersPlaced);
+        if (isCompletedGame) {
+            gameStats.gameOver(checkersPlaced);
+        }
 
         // Reset board, pointer, score
         connectFourBoard = constructBoard();
@@ -188,6 +193,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         highScore = readHighScore();
 
         isRunning = false;
+        isCompletedGame = false;
     }
 
     /**
@@ -265,6 +271,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
 
             if (connectFourBoard.checkWin()) {
                 showWinMessage();
+                isCompletedGame = true;
                 stopGame();
             }
             pointer.changePlayer();
