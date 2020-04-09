@@ -30,6 +30,9 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Properties;
 
+/**
+ * Class representing the players' pointer, a rectangle that points to the currently selected column
+ */
 public class Pointer extends Rectangle2D.Double {
     private static Properties properties = ConnectFour.getProperties();
     private Polygon triangle;
@@ -57,7 +60,7 @@ public class Pointer extends Rectangle2D.Double {
         col = 0;
     }
 
-    public Polygon constructTriangle() {
+    private Polygon constructTriangle() {
         double triangleYOffset = getHeight() / 4.0;
         double triangleXOffset = getWidth() / 4.0;
         int[] triangleXCoordinates = {

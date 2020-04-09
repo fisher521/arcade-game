@@ -35,6 +35,9 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Class representing the panel in which the game is played.
+ */
 public class UserPanel extends JPanel implements KeyListener, JavaArcade {
     private static Properties properties = ConnectFour.getProperties();
     private GameStats gameStats;
@@ -210,7 +213,7 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      * This method provides access to GameStats display for UserPanel to pass information to update score.
      * GameStats is created in ConnectFour; a reference should be passed to UserPanel (main panel) to update points.
      *
-     * @param d
+     * @param d GameStats to be updated
      */
     @Override
     public void setDisplay(GameStats d) {
@@ -222,8 +225,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      * Invoked when a key has been typed.
      * See the class description for {@link KeyEvent} for a definition of
      * a key typed event.
-     *
-     * @param e
      */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -234,8 +235,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      * Invoked when a key has been pressed.
      * See the class description for {@link KeyEvent} for a definition of
      * a key pressed event.
-     *
-     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -262,6 +261,11 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         }
     }
 
+    /**
+     * Places a checker on the board and stops the game if the current player wins.
+     *
+     * @return true if valid placement, false if not
+     */
     private boolean takeTurn() {
         if (connectFourBoard.placeChecker(pointer.isP1(), pointer.getCol())) {
             checkersPlaced++;
@@ -280,6 +284,9 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
         return false;
     }
 
+    /**
+     * Shows a dialog box notifying that a player has won.
+     */
     private void showWinMessage() {
         String player;
         if (pointer.isP1()) {
@@ -296,8 +303,6 @@ public class UserPanel extends JPanel implements KeyListener, JavaArcade {
      * Invoked when a key has been released.
      * See the class description for {@link KeyEvent} for a definition of
      * a key released event.
-     *
-     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {

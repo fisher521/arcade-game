@@ -30,6 +30,9 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.util.Properties;
 
+/**
+ * Class representing a playable piece in Connect Four.
+ */
 public class Checker extends Ellipse2D.Double {
     private static Properties properties = ConnectFour.getProperties();
     private CheckerType type;
