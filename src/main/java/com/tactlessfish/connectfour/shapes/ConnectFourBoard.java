@@ -30,6 +30,9 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Properties;
 
+/**
+ * Class representing a board that holds checkers in Connect Four.
+ */
 public class ConnectFourBoard extends Rectangle2D.Double {
     private static Properties properties = ConnectFour.getProperties();
 
@@ -114,6 +117,11 @@ public class ConnectFourBoard extends Rectangle2D.Double {
         return false;
     }
 
+    /**
+     * Checks the board for four of the last player's checkers connected horizontally, vertically, or diagonally.
+     *
+     * @return true if board has a winning four, false if not
+     */
     public boolean checkWin() {
         String player = checkers[latestRow][latestCol].toString();
         String fourInARow = String.join("", player, player, player, player);
