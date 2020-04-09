@@ -85,6 +85,8 @@ public class ConnectFourBoard extends Rectangle2D.Double {
      */
     public void drawAll(Graphics2D graphics2D) {
         graphics2D.setColor(Color.decode(properties.getProperty("boardColor")));
+
+        // polymorphism to fill any interface java.awt.Shape
         graphics2D.fill(this);
 
         for (Checker[] row : checkers) {
